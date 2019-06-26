@@ -30,12 +30,7 @@ class Counter extends Component {
           -
         </button>
 
-        <button
-          onClick={this.handelDecrement}
-          className="btn btn-secondary btn-sm m-2"
-        >
-          *
-        </button>
+        <button className="btn btn-secondary btn-sm m-2">++</button>
         <div>
           {/* if condition but dosent have an else */}
           {this.state.count === 0 && "Please Count = 0 "}
