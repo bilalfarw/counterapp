@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {
-    value: this.props.value,
-    list: ["bilal", "omar", "mohamed"]
-  };
-
   render() {
     return (
       // we need to add more than one child ,
@@ -14,20 +9,23 @@ class Counter extends Component {
       <React.Fragment>
         {/*arrow function onClick coz u need to pass argus to function but
         this.handelincerment refers to an object in js , then u need to */}
+        {this.props.children}
+
+        <span className={this.Class()}>{this.plus()}</span>
         <button
           onClick={() => {
-            this.handelIncerment({ id: this.state.value });
+            this.props.onIncrement(this.props.counter);
           }}
           className="btn btn-secondary btn-sm m-2"
         >
           +
         </button>
-        <span className={this.Class()}>{this.plus()}</span>
+
         <button
-          onClick={this.handelDecrement}
-          className="btn btn-secondary btn-sm m-2"
+          onClick={() => this.props.onDel(this.props.counter.id)}
+          className="btn btn-danger btn-sm m-2"
         >
-          -
+          Delete
         </button>
 
         {/*
@@ -43,20 +41,14 @@ class Counter extends Component {
 
   Class() {
     let classes = "badge  m-2 badge-";
-    classes += this.state.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 
-  handelIncerment = id => {
-    this.setState({ value: this.state.value + 1 });
-  };
-  handelDecrement = () => {
-    if (this.state.value > 0) this.setState({ value: this.state.value - 1 });
-  };
-
   plus() {
-    return this.state.value === 0 ? "ZERO" : this.state.value;
+    return this.props.counter.value === 0 ? "ZERO" : this.props.counter.value;
   }
+
   renderTags() {
     if (this.state.list.length === 0) return <p>The List is Empty!</p>;
     return (
